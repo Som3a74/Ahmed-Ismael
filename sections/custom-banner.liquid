@@ -1,0 +1,20 @@
+{{'custom-banner.css' | asset_url | stylesheet_tag }}
+
+<div 
+    class="custom-banner-wrapper" 
+    style="background-image: url('{{ 'custom-banner-image.png' | asset_url }}');"
+>
+  <div class="container">
+    <div class="banner-content">
+      <h2 class="banner-title">{{ section.settings.title }}</h2>
+      <p class="banner-description">{{ section.settings.description }}</p>
+      <a href="#" class="banner-btn">
+        <span class="btn-text">Shop Now</span>
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+    <div class="banner-image">
+      <img src="{{ 'custom-banner-image.png' | asset_url }}" alt="Custom Banner">
+    </div>
+  </div>  
+</div>
