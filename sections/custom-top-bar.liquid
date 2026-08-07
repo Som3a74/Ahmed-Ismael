@@ -1,0 +1,66 @@
+{{ 'custom-top-bar.css' | asset_url | stylesheet_tag }}
+
+<div class="custom-top-bar-wrapper">
+  <div class="custom-top-bar-container">
+    
+    <div class="custom-top-bar-left">
+      <a href="{{ routes.root_url }}" class="custom-top-bar-logo">
+        {{ section.settings.logo_text | default: 'TISSO VISON' }}
+      </a>
+    </div>
+
+    <div class="custom-top-bar-center">
+      {% if section.settings.center_text != blank %}
+        <p class="custom-top-bar-text">{{ section.settings.center_text }}</p>
+      {% endif %}
+    </div>
+
+    <div class="custom-top-bar-right">
+      {% if section.settings.btn_text != blank %}
+        <a href="{{ section.settings.btn_url | default: '#' }}" class="custom-top-bar-btn">
+          <span>{{ section.settings.btn_text }}</span>
+          <svg class="custom-top-bar-btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Top Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo Text",
+      "default": "TISSO VISON"
+    },
+    {
+      "type": "text",
+      "id": "center_text",
+      "label": "Announcement Text",
+      "default": "Find the ideal gift for your loved ones."
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "CHOOSE GIFT"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Top Bar"
+    }
+  ]
+}
+{% endschema %}

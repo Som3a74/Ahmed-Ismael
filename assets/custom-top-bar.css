@@ -1,0 +1,91 @@
+/* Custom Top Bar Section CSS */
+:root {
+  --ctb-font-family: 'Jost', sans-serif;
+  --ctb-bg-color: #f5f5f5;
+  --ctb-text-color: #000000;
+  --ctb-btn-bg-color: #fff544;
+}
+
+.custom-top-bar-wrapper {
+  background-color: var(--ctb-bg-color);
+  width: 100%;
+  padding: 10px 50px; /* matched Figma px-[50px] py-[10px] */
+  box-sizing: border-box;
+}
+
+.custom-top-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.custom-top-bar-logo {
+  font-family: var(--ctb-font-family);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ctb-text-color);
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.custom-top-bar-text {
+  font-family: var(--ctb-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--ctb-text-color);
+  text-align: center;
+  margin: 0;
+}
+
+.custom-top-bar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 207px; /* Matched to Figma w-[207px] */
+  height: 44px; /* Matched to Figma h-[44px] */
+  background-color: var(--ctb-btn-bg-color);
+  color: var(--ctb-text-color);
+  font-family: var(--ctb-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-decoration: none;
+  gap: 12px;
+  transition: opacity 0.3s ease;
+  position: relative;
+}
+
+.custom-top-bar-btn:hover {
+  opacity: 0.8;
+}
+
+.custom-top-bar-btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.custom-top-bar-btn:hover .custom-top-bar-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 1024px) {
+  .custom-top-bar-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .custom-top-bar-wrapper {
+    padding: 15px 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .custom-top-bar-text {
+    font-size: 14px;
+  }
+}
