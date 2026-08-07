@@ -175,11 +175,11 @@
       const selectedBtn = container.querySelector(`[data-value="${value}"]`);
       if (selectedBtn) {
         selectedBtn.classList.add('selected');
-        const slider = container.querySelector('.custom-popup-color-slider');
-        if (slider) {
-          slider.style.width = `${selectedBtn.offsetWidth}px`;
-          slider.style.transform = `translateX(${selectedBtn.offsetLeft}px)`;
-        }
+        const btns = Array.from(container.querySelectorAll('.custom-popup-color-btn'));
+        const btnIndex = btns.indexOf(selectedBtn);
+        const totalBtns = btns.length;
+        container.style.setProperty('--btn-count', totalBtns);
+        container.style.setProperty('--active-index', btnIndex);
       }
     }
 
@@ -239,11 +239,11 @@
         container.querySelectorAll('.custom-popup-color-btn').forEach(b => b.classList.remove('selected'));
         colorBtn.classList.add('selected');
         
-        const slider = container.querySelector('.custom-popup-color-slider');
-        if (slider) {
-          slider.style.width = `${colorBtn.offsetWidth}px`;
-          slider.style.transform = `translateX(${colorBtn.offsetLeft}px)`;
-        }
+        const btns = Array.from(container.querySelectorAll('.custom-popup-color-btn'));
+        const btnIndex = btns.indexOf(colorBtn);
+        const totalBtns = btns.length;
+        container.style.setProperty('--btn-count', totalBtns);
+        container.style.setProperty('--active-index', btnIndex);
       }
     });
 

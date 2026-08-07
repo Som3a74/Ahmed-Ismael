@@ -36,9 +36,8 @@
   --cb-font-family: "Jost", sans-serif;
   --cb-color-text: #000000;
   --cb-color-bg: #ffffff;
-  --cb-color-btn-bg: #000000;
-  --cb-color-btn-text: #ffffff;
-  --cb-color-btn-hover-bg: #333333;
+  --cb-color-btn-bg: #fff544;
+  --cb-color-btn-text: #000000;
 }
 
 /* ==========================================================================
@@ -131,12 +130,31 @@
   font-weight: 400;
   font-size: 16px;
   text-transform: uppercase;
-  transition: all 0.3s ease;
+  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   gap: 16px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.custom-banner-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  background-color: #000;
+  z-index: -1;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .custom-banner-btn:hover {
-  background-color: var(--cb-color-btn-hover-bg);
+  color: #fff;
+}
+
+.custom-banner-btn:hover::before {
+  width: 100%;
 }
 
 .custom-banner-btn-text {

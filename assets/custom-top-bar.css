@@ -56,12 +56,30 @@
   text-transform: uppercase;
   text-decoration: none;
   gap: 12px;
-  transition: opacity 0.3s ease;
   position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-top-bar-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  background-color: #000;
+  z-index: -1;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .custom-top-bar-btn:hover {
-  opacity: 0.8;
+  color: #fff;
+}
+
+.custom-top-bar-btn:hover::before {
+  width: 100%;
 }
 
 .custom-top-bar-btn-arrow {
