@@ -11,13 +11,48 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "custom_top_bar_apWjey": {
+      "type": "custom-top-bar",
+      "name": "Custom Top Bar",
+      "settings": {
+        "logo_text": "TISSO VISON",
+        "center_text": "Find the ideal gift for your loved ones.",
+        "btn_text": "CHOOSE GIFT",
+        "btn_url": ""
+      }
+    },
+    "custom_banner_7Eb38X": {
+      "type": "custom-banner",
+      "name": "Custom Banner",
+      "settings": {
+        "title": "The Gift Guide",
+        "description": "Discover Joy: Your Ultimate Holiday Gift Destination.",
+        "btn_text": "SHOP NOW",
+        "btn_url": "",
+        "strip_text": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR"
+      }
+    },
+    "custom_grid_iUh4Xm": {
+      "type": "custom-grid",
+      "name": "Custom Grid",
+      "settings": {
+        "title": "Tisso vison in the wild",
+        "collection": "figma-collection",
+        "products_to_show": 6,
+        "secondary_product": "dark-winter-jacket"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "custom_top_bar_apWjey",
+    "custom_banner_7Eb38X",
+    "custom_grid_iUh4Xm"
   ]
 }
