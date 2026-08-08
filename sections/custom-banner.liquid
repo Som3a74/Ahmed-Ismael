@@ -1,0 +1,102 @@
+{{ 'custom-banner.css' | asset_url | stylesheet_tag }}
+
+<div class="custom-banner-wrapper">
+  <!-- Top Frame SVG -->
+  <img
+    class="custom-banner-frame-top"
+    src="{{ 'Frame.svg' | asset_url }}"
+    alt="Gift Guide Background Top"
+    width="1440"
+    height="390"
+    loading="lazy"
+  >
+
+  <!-- Bottom Right Frame SVG -->
+  <img
+    class="custom-banner-frame-bottom"
+    width="890"
+    height="402"
+    src="{{ 'Frame.svg' | asset_url }}"
+    alt="Gift Guide Background Bottom"
+    loading="lazy"
+  >
+  <div class="custom-banner-container">
+    <div class="custom-banner-content">
+      {% if section.settings.title != blank %}
+        <h2 class="custom-banner-title">{{ section.settings.title }}</h2>
+      {% endif %}
+
+      {% if section.settings.description != blank %}
+        <p class="custom-banner-description">{{ section.settings.description }}</p>
+      {% endif %}
+
+      {% if section.settings.btn_text != blank %}
+        <a href="{{ section.settings.btn_url | default: '#' }}" class="custom-banner-btn">
+          <span class="custom-banner-btn-text">{{ section.settings.btn_text }}</span>
+          <svg
+            class="custom-banner-btn-arrow"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% if section.settings.strip_text != blank %}
+<div class="custom-banner-strip">
+  <p>{{ section.settings.strip_text }}</p>
+</div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Custom Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "The Gift Guide"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination."
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Strip"
+    },
+    {
+      "type": "text",
+      "id": "strip_text",
+      "label": "Strip Text",
+      "default": "SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Banner"
+    }
+  ]
+}
+{% endschema %}

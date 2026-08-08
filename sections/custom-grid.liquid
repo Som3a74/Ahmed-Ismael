@@ -1,0 +1,136 @@
+{{ 'custom-grid.css' | asset_url | stylesheet_tag }}
+{{ 'custom-popup.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'custom-popup.js' | asset_url }}" defer="defer"></script>
+
+<div class="custom-grid-wrapper">
+  <div class="custom-grid-container">
+    {% if section.settings.title != blank %}
+      <h2 class="custom-grid-title">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    <div class="custom-grid-list">
+      {% assign product_collection = section.settings.collection %}
+      {% if product_collection != blank and product_collection.products_count > 0 %}
+        {% for product in product_collection.products limit: section.settings.products_to_show %}
+          <div class="custom-grid-item">
+            <a href="{{ product.url }}" class="custom-grid-item-link">
+              {% if product.featured_image != blank %}
+                <img 
+                  src="{{ product.featured_image | img_url: '800x' }}" 
+                  alt="{{ product.title | escape }}"
+                  class="custom-grid-item-image"
+                  loading="lazy"
+                  width="433"
+                  height="444"
+                >
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'custom-grid-item-image placeholder-svg' }}
+              {% endif %}
+            </a>
+            <button type="button" class="custom-grid-hotspot open-popup-btn" data-product-id="{{ product.id }}">
+              <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 1V13M1 7H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <script type="application/json" id="product-json-{{ product.id }}">
+              {{ product | json }}
+            </script>
+            <div id="product-desc-{{ product.id }}" style="display: none;">
+              {{ product.description }}
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        {% for i in (1..section.settings.products_to_show) %}
+          <div class="custom-grid-item">
+            <a href="#" class="custom-grid-item-link">
+              {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+              {{ 'product-' | append: current | placeholder_svg_tag: 'custom-grid-item-image placeholder-svg' }}
+              <div class="custom-grid-hotspot">
+                <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 1V13M1 7H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- Custom Quick View Modal -->
+{% assign secondary_id = section.settings.secondary_product.selected_or_first_available_variant.id | default: all_products['soft-winter-jacket'].selected_or_first_available_variant.id %}
+<div id="customQuickViewModal" class="custom-popup-overlay" data-secondary-product-id="{{ secondary_id }}">
+  <div class="custom-popup-modal">
+    <button type="button" class="custom-popup-close" aria-label="Close modal">&times;</button>
+    <div class="custom-popup-content">
+      <div class="custom-popup-header">
+        <div class="custom-popup-image-container">
+          <img id="popup-image" src="" alt="Product Image" class="custom-popup-image">
+        </div>
+        <div class="custom-popup-info">
+          <h3 id="popup-title" class="custom-popup-title"></h3>
+          <p id="popup-price" class="custom-popup-price"></p>
+          <div id="popup-description" class="custom-popup-description"></div>
+        </div>
+      </div>
+      
+      <form id="popup-form" class="custom-popup-form">
+          <input type="hidden" id="popup-variant-id" name="id" value="">
+          <div id="popup-options" class="custom-popup-options">
+            <!-- Dynamically populated variant selectors -->
+          </div>
+          
+          <button type="button" id="popup-add-to-cart" class="custom-popup-btn">
+            ADD TO CART <span class="custom-popup-btn-arrow">&longrightarrow;</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Tisso vison in the wild"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 3,
+      "max": 12,
+      "step": 3,
+      "default": 6,
+      "label": "Maximum products to show"
+    },
+    {
+      "type": "header",
+      "content": "Popup Conditional Logic"
+    },
+    {
+      "type": "product",
+      "id": "secondary_product",
+      "label": "Secondary Product (Soft Winter Jacket)",
+      "info": "This product will be automatically added to the cart if the user selects 'Black' and 'Medium' in the popup."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Grid"
+    }
+  ]
+}
+{% endschema %}
