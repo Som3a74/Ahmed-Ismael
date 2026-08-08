@@ -7,7 +7,16 @@ This repository contains the custom Shopify sections and features developed for 
 ## 🌐 Live Store Preview & Access
 
 * **Direct Preview Page URL:** [https://ahmed-ismael-48-teststore.myshopify.com/pages/figma-test-1](https://ahmed-ismael-48-teststore.myshopify.com/pages/figma-test-1)
-* **Store Password:** `123`
+* **Store Password:** `ahmedismael123`
+
+---
+
+## ⏱️ Time Doctor Credentials (Evaluation Requirement)
+
+As requested in **Part One** of the test instructions, here are the login credentials for the trial Time Doctor account used during this assessment to track work progress and screenshots:
+
+* **Time Doctor Login Email:** `althanytaywan63@gmail.com`
+* **Time Doctor Password:** `Althanytaywan63@gmail.com`
 
 ---
 
@@ -17,6 +26,7 @@ This repository contains the custom Shopify sections and features developed for 
 - Built entirely from scratch following a pixel-perfect design from Figma without relying on ready-made Dawn sections.
 - Configurable settings via the Shopify Theme Customizer (editable headings, descriptions, image illustrations, button label, and link).
 - Styled cleanly using a dedicated external CSS file (`assets/custom-banner.css`).
+- Implemented smooth button animations as required.
 
 ### 2. Custom Grid Section & Interactive Modal (`custom-grid.liquid`)
 - Displays a 6-product grid matching the provided Figma layout.
