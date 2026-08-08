@@ -265,24 +265,41 @@
     addToCartBtn.disabled = true;
 
     const secondaryVariantId = modal.getAttribute('data-secondary-product-id');
-    const isBlack = [currentVariant.option1, currentVariant.option2, currentVariant.option3].includes('Black');
-    const isMedium = [currentVariant.option1, currentVariant.option2, currentVariant.option3].includes('Medium');
+    
+    // Case-insensitive check for variant options, accounting for 'M' vs 'Medium'
+    const options = [currentVariant.option1, currentVariant.option2, currentVariant.option3]
+      .filter(Boolean)
+      .map(opt => opt.trim().toLowerCase());
+      
+    const isBlack = options.includes('black');
+    const isMedium = options.includes('medium') || options.includes('m');
 
     const itemsToAdd = [];
     itemsToAdd.push({ id: currentVariant.id, quantity: 1 });
 
     if (isBlack && isMedium && secondaryVariantId) {
       itemsToAdd.push({ id: parseInt(secondaryVariantId, 10), quantity: 1 });
+      console.log('Condition met! Adding main product + Secondary Product (Jacket).');
+    } else {
+      console.log('Condition NOT met. Adding main product only.');
     }
 
     try {
-      const response = await fetch(window.Shopify.routes.root + 'cart/add.js', {
+      const requestConfig = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: itemsToAdd })
-      });
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ items: itemsToAdd }) 
+      };
 
-      if (!response.ok) throw new Error('Failed to add to cart');
+      const response = await fetch(window.Shopify.routes.root + 'cart/add.js', requestConfig);
+      const data = await response.json();
+
+      if (!response.ok) throw new Error(data.description || 'Failed to add to cart');
+
+      console.log('Successfully added to cart:', data);
 
       addToCartBtn.classList.remove('loading');
       addToCartBtn.disabled = false;
@@ -291,17 +308,35 @@
       setTimeout(() => {
         closeModal();
         addToCartBtn.innerHTML = 'ADD TO CART <span class="custom-popup-btn-arrow">&longrightarrow;</span>';
-      }, 1000);
+        onAddToCartSuccess(data);
+      }, 500);
 
     } catch (error) {
-      console.error('Error adding to cart:', error);
+      console.error('Add To Cart Error:', error.message);
       addToCartBtn.classList.remove('loading');
       addToCartBtn.disabled = false;
       addToCartBtn.textContent = 'Error';
     }
   };
 
-  // Event Delegation for opening modal (handles dynamic DOM and async loads)
+  /**
+   * Hook to trigger after a successful Add to Cart.
+   * Integrates cleanly with Dawn's Cart Notification or Cart Drawer.
+   */
+  const onAddToCartSuccess = (cartData) => {
+    const cartDrawer = document.querySelector('cart-drawer');
+    const cartNotification = document.querySelector('cart-notification');
+
+    if (cartDrawer && typeof cartDrawer.open === 'function') {
+      cartDrawer.open(); 
+    } else if (cartNotification && typeof cartNotification.renderContents === 'function') {
+      cartNotification.renderContents(cartData);
+    } else {
+      document.dispatchEvent(new CustomEvent('cart:updated'));
+    }
+  };
+
+  // Event Delegation for modal actions
   document.addEventListener('click', (e) => {
     // Check if clicked element or its parent is the open button
     const btn = e.target.closest('.open-popup-btn');
@@ -320,11 +355,12 @@
     if (modal && e.target === modal) {
       closeModal();
     }
-  });
 
-  // Event Listener for form submit
-  document.addEventListener('submit', (e) => {
-    if (e.target.id === 'popup-form') {
+    // Check for Add to Cart button click
+    const addToCartClicked = e.target.closest('#popup-add-to-cart');
+    if (addToCartClicked) {
+      // Force prevent default explicitly here as requested
+      e.preventDefault();
       handleAddToCart(e);
     }
   });

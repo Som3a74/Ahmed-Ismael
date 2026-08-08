@@ -105,7 +105,7 @@
    ========================================================================== */
 @media screen and (max-width: 1024px) {
   .custom-grid-wrapper {
-    padding: 50px 30px;
+    padding: 80px 30px;
   }
   .custom-grid-list {
     grid-template-columns: repeat(2, 1fr);
@@ -114,12 +114,37 @@
 
 @media screen and (max-width: 768px) {
   .custom-grid-wrapper {
-    padding: 40px 20px;
+    padding: 40px 16px;
+    align-items: center;
+  }
+  .custom-grid-container {
+    gap: 20px; /* Gap between title and grid on mobile */
+    align-items: center;
   }
   .custom-grid-title {
-    font-size: 28px;
+    font-size: 24px; /* Figma mobile text size */
+    text-align: center;
   }
   .custom-grid-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px; /* Figma mobile gap */
+    width: 100%;
+    max-width: 342px; /* Figma mobile width for the grid */
+    margin: 0 auto;
+  }
+  .custom-grid-item {
+    aspect-ratio: 169 / 186.42; /* Mobile pixel perfect ratio */
+  }
+  .custom-grid-hotspot {
+    width: 22px; /* Perfect size for mobile touch */
+    height: 22px;
+    top: 12px;   /* Adjusted to match the top-right corner spacing in screenshot */
+    right: 12px;
+    left: auto;
+    bottom: auto;
+  }
+  .custom-grid-hotspot svg {
+    width: 10px;
+    height: 10px;
   }
 }

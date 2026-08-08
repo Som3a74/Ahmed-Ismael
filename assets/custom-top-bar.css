@@ -90,6 +90,15 @@
   transform: translateX(4px);
 }
 
+.custom-top-bar-menu-icon {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--ctb-text-color);
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 1024px) {
   .custom-top-bar-container {
@@ -103,7 +112,41 @@
 }
 
 @media screen and (max-width: 768px) {
-  .custom-top-bar-text {
-    font-size: 14px;
+  .custom-top-bar-wrapper {
+    display: block;
+    padding: 0 16px;
+    height: 65px; /* Exact height from Figma */
+    background-color: #ffffff; /* Figma mobile header background is white */
+  }
+
+  .custom-top-bar-container {
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+    justify-content: center; /* Center the logo */
+    position: relative;
+  }
+
+  .custom-top-bar-left {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .custom-top-bar-menu-icon {
+    display: block;
+    position: absolute;
+    left: 0;
+  }
+
+  .custom-top-bar-logo {
+    font-size: 18px; /* Slightly smaller for mobile if needed, or keep 20px */
+    letter-spacing: 2px;
+  }
+
+  .custom-top-bar-center,
+  .custom-top-bar-right {
+    display: none; /* Hide on mobile to match Figma */
   }
 }

@@ -61,7 +61,8 @@
 </div>
 
 <!-- Custom Quick View Modal -->
-<div id="customQuickViewModal" class="custom-popup-overlay" data-secondary-product-id="{{ section.settings.secondary_product.selected_or_first_available_variant.id }}">
+{% assign secondary_id = section.settings.secondary_product.selected_or_first_available_variant.id | default: all_products['soft-winter-jacket'].selected_or_first_available_variant.id %}
+<div id="customQuickViewModal" class="custom-popup-overlay" data-secondary-product-id="{{ secondary_id }}">
   <div class="custom-popup-modal">
     <button type="button" class="custom-popup-close" aria-label="Close modal">&times;</button>
     <div class="custom-popup-content">
@@ -82,7 +83,7 @@
             <!-- Dynamically populated variant selectors -->
           </div>
           
-          <button type="submit" id="popup-add-to-cart" class="custom-popup-btn">
+          <button type="button" id="popup-add-to-cart" class="custom-popup-btn">
             ADD TO CART <span class="custom-popup-btn-arrow">&longrightarrow;</span>
           </button>
         </form>

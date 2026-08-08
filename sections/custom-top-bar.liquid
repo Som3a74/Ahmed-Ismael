@@ -2,8 +2,12 @@
 
 <div class="custom-top-bar-wrapper">
   <div class="custom-top-bar-container">
-    
     <div class="custom-top-bar-left">
+      <button class="custom-top-bar-menu-icon" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+          <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
       <a href="{{ routes.root_url }}" class="custom-top-bar-logo">
         {{ section.settings.logo_text | default: 'TISSO VISON' }}
       </a>
@@ -19,13 +23,19 @@
       {% if section.settings.btn_text != blank %}
         <a href="{{ section.settings.btn_url | default: '#' }}" class="custom-top-bar-btn">
           <span>{{ section.settings.btn_text }}</span>
-          <svg class="custom-top-bar-btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            class="custom-top-bar-btn-arrow"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
           </svg>
         </a>
       {% endif %}
     </div>
-
   </div>
 </div>
 

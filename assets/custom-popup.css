@@ -302,3 +302,45 @@
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
+/* ==========================================================================
+   Responsive Adjustments for Popup
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+  .custom-popup-modal {
+    width: calc(100% - 32px); /* 16px margin on each side */
+    max-width: 343px;
+    padding: 20px;
+  }
+
+  .custom-popup-header {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .custom-popup-image-container {
+    width: 100px;
+    height: 115px; /* Adjust aspect ratio proportionally */
+  }
+
+  .custom-popup-title {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .custom-popup-price {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .custom-popup-description {
+    font-size: 12px;
+  }
+
+  .custom-popup-color-btn,
+  .custom-popup-select,
+  .custom-popup-btn {
+    font-size: 14px;
+    height: 38px;
+  }
+}
